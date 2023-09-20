@@ -23,6 +23,9 @@ class Articles
     #[ORM\Column(length: 255)]
     private ?string $images = null;
 
+    #[ORM\Column]
+    private ?int $price = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,18 @@ class Articles
     public function setImages(string $images): static
     {
         $this->images = $images;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): static
+    {
+        $this->price = $price;
 
         return $this;
     }

@@ -13,12 +13,13 @@ class ArticlesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('description')
+            ->add('name') //Champs du formulaire name
+            ->add('description') //description
+            ->add('price') //prix
             ->add('images', FileType::class, [
                 "mapped" => false,
                 "required" => false,
-            ]);
+            ]); // Images
     }
 
     public function configureOptions(OptionsResolver $resolver): void

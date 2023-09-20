@@ -21,18 +21,18 @@ class UserFixtures extends Fixture
     {
         // Création d’un utilisateur de type “utilisateur” 
         $user = new User();
-        $user->setEmail('jacques.saumon@gmoule.com');
-        $user->setRoles(['ROLE_CONTRIBUTOR']);
-        $user->setAge('34');
+        $user->setEmail('jacques.saumon@gmoule.com'); //On peut mettre un mail bidon
+        $user->setRoles(['ROLE_CONTRIBUTOR']); //On met un role
+        $user->setAge('34'); //Un age
         $hashedPassword = $this->passwordHasher->hashPassword(
             $user,
             'user'
-        );
+        ); // On hash le mot de passe
 
         $user->setPassword($hashedPassword);
         $manager->persist($user);
 
-        // Création d’un utilisateur de type “administrateur”
+        // Création d’un utilisateur de type “administrateur” et on fait pareil
         $admin = new User();
         $admin->setEmail('admin@crazybox.com');
         $admin->setRoles(['ROLE_ADMIN']);
