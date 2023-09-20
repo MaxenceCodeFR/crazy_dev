@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Articles index
+{% block title %}
+	Articles index
 {% endblock %}
 
 {% block body %}
@@ -13,34 +14,26 @@
 				<tr>
 					<td>{{ article.name }}</td>
 					<td>{{ article.description }}</td>
-					<td><img src="{{ path('articles_image', {'images': article.images}) }}"/></td>
+					<td><img src="{{ asset('assets/upload_directory/' ~ article.images) }}" alt={{article.name}}></td>
+				</tr>
+				<td>
+					<button>Commander</button>
+				</td>
+			</td>
 
-					{% if is_granted("ROLE_ADMIN") %}
-						<td>
-							<a href="{{ path('app_articles_show', {'id': article.id}) }}">show</a>
-							<a href="{{ path('app_articles_edit', {'id': article.id}) }}">edit</a>
-						</td>
-					{% endif %}
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="5">no records found</td>
-				</tr>
-			{% endfor %}
+
+			{% if is_granted("ROLE_ADMIN") %}
+				<td>
+					<a href="{{ path('app_articles_show', {'id': article.id}) }}">show</a>
+					<a href="{{ path('app_articles_edit', {'id': article.id}) }}">edit</a>
+				</td>
+			{% endif %}
 		</tbody>
-	</table>
-
-	{% if is_granted("ROLE_ADMIN") %}
-		<a href="{{ path('app_articles_new') }}">Create new</a>
-	{% endif %}
-
-	{% if app.user %}
-		{{ app.user.email }}
-		<a href="{{ path('app_logout') }}">
-			Se déconnecter</a>
-	{% else %}
-		<a href="{{ path('login') }}">
-			Se connecter</a>
-	{% endif %}
-
-{% endblock %}
+	</tr>
+{% else %}
+	<tr>
+		<td colspan="5">no records found</td>
+	</tr>
+{% endfor %}</tbody></table>{% if is_granted("ROLE_ADMIN") %}<a href="{{ path('app_articles_new') }}">Create new</a>{% endif %}{% if app.user %}{{ app.user.email }}<a href="{{ path('app_logout') }}">
+Se déconnecter</a>{% else %}<a href="{{ path('login') }}">
+Se connecter</a>{% endif %}{% endblock %}

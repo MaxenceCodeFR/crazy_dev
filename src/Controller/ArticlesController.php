@@ -30,6 +30,14 @@ class ArticlesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /* Recupéré l'image */
+            $file = $form->get("images")->getData();
+            /* Créer un nom unique pour l'image et recuperer l'extension*/
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $article->setImages($fileName);
+            /* Deplacer l'image dans le dossier public/images */
+            $file->move($this->getParameter('upload_directory'), $fileName);
+
             $entityManager->persist($article);
             $entityManager->flush();
 
@@ -57,6 +65,14 @@ class ArticlesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /* Recupéré l'image */
+            $file = $form->get("images")->getData();
+            /* Créer un nom unique pour l'image et recuperer l'extension*/
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $article->setImages($fileName);
+            /* Deplacer l'image dans le dossier public/images */
+            $file->move($this->getParameter('upload_directory'), $fileName);
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_articles_index', [], Response::HTTP_SEE_OTHER);

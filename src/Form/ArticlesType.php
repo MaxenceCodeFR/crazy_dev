@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Articles;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,8 +15,10 @@ class ArticlesType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('images')
-        ;
+            ->add('images', FileType::class, [
+                "mapped" => false,
+                "required" => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
