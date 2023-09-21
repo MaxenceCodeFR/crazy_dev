@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Articles;
+use App\Entity\User;
 use App\Form\ArticlesType;
+use Symfony\Component\Mime\Email;
+use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\ArticlesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,11 +15,17 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Mime\Email;
 
 #[Route('/articles')]
 class ArticlesController extends AbstractController
 {
+    private $doctrine;
+
+    public function __construct(ManagerRegistry $doctrine)
+    {
+        $this->doctrine = $doctrine;
+    }
+
     #[Route('/', name: 'app_articles_index', methods: ['GET'])]
     public function index(ArticlesRepository $articlesRepository): Response
     {
@@ -27,12 +37,16 @@ class ArticlesController extends AbstractController
     #[Route('/new', name: 'app_articles_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
+
         $article = new Articles();
         $form = $this->createForm(ArticlesType::class, $article);
         $form->handleRequest($request);
 
+        $userRepository = $this->doctrine->getRepository(User::class);
+        $users = $userRepository->findAll();
+
         if ($form->isSubmitted() && $form->isValid()) {
-            //Création d'un nouveau mail//
+
             $email = (new Email())
                 //On fixe l'expéditeur définitivement
                 ->from($this->getParameter('mailer_from'))
@@ -46,6 +60,7 @@ class ArticlesController extends AbstractController
                 ]));
             //On envoie le mail
             $mailer->send($email);
+
 
             /////////////////////////////////////////////////////
 

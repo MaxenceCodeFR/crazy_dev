@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Articles index
+	Tous nos articles
 {% endblock %}
 
 {% block body %}
-	<h1>Articles index</h1>
+	<h1>Faites votre choix</h1>
 
 	<table class="table">
 
@@ -24,18 +24,20 @@
 			</td>
 
 
-			{% if is_granted("ROLE_ADMIN") %}
-				<td>
-					<a href="{{ path('app_articles_show', {'id': article.id}) }}">show</a>
-					<a href="{{ path('app_articles_edit', {'id': article.id}) }}">edit</a>
+			<td>
+				<a href="{{ path('app_articles_show', {'id': article.id}) }}">Afficher</a>
+
+				{#Affiche l'édition seulement si le rôle admin est actif #}
+				{% if is_granted("ROLE_ADMIN") %}
+					<a href="{{ path('app_articles_edit', {'id': article.id}) }}">Editer</a>
 				</td>
 			{% endif %}
 		</tbody>
 	</tr>
 {% else %}
 	<tr>
-		<td colspan="5">no records found</td>
+		<td colspan="5">Notre site a soit fermé, ou soit en maintenances</td>
 	</tr>
-{% endfor %}</tbody></table>{% if is_granted("ROLE_ADMIN") %}<a href="{{ path('app_articles_new') }}">Create new</a>{% endif %}{% if app.user %}{{ app.user.email }}<a href="{{ path('app_logout') }}">
+{% endfor %}</tbody></table>{# Pareil, seulement l'admin peut crée des box#}{% if is_granted("ROLE_ADMIN") %}<a href="{{ path('app_articles_new') }}">Create new</a>{% endif %}{% if app.user %}{{ app.user.email }}<a href="{{ path('app_logout') }}">
 Se déconnecter</a>{% else %}<a href="{{ path('login') }}">
 Se connecter</a>{% endif %}{% endblock %}
