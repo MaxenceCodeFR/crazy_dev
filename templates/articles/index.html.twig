@@ -39,5 +39,5 @@
 		<td colspan="5">Notre site a soit fermé, ou soit en maintenances</td>
 	</tr>
 {% endfor %}</tbody></table>{# Pareil, seulement l'admin peut crée des box#}{% if is_granted("ROLE_ADMIN") %}<a href="{{ path('app_articles_new') }}">Create new</a>{% endif %}{% if app.user %}{{ app.user.email }}<a href="{{ path('app_logout') }}">
-Se déconnecter</a>{% else %}<a href="{{ path('login') }}">
+Se déconnecter</a>{% else %}<a href="{{ path('app_login') }}">
 Se connecter</a>{% endif %}{% endblock %}
