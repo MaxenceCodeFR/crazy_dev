@@ -1,4 +1,4 @@
-Fait par Jules Hervé et Maxence HATTABI
+Fait par Jules HERVE et Maxence HATTABI
 
 Ceci a été fait en 3/4 jours pour jauger nos niveaux actuels sans compétition commune
 
