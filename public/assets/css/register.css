@@ -1,0 +1,30 @@
+.h1register {
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.registerall {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1b2832;
+    margin: 0 30% 0 30%;
+    border-radius: 15px;
+    padding-top: 20px;
+    flex-direction: column;
+}
+
+.buttonregister {
+    margin-top: 10px;
+}
+
+/***************************************************************************************/
+/*Partie Login
+/***************************************************************************************/
+
+.loginall {
+    padding: 5%;
+}

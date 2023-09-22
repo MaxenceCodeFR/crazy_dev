@@ -1,0 +1,21 @@
+@import 'style.css';
+
+.indexdiv {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.indexh1 {
+    font-size: 15em;
+}
+
+.indexspan {
+    color: #266b9f;
+}
+
+.indexh3 {
+    font-size: 30px;
+    text-align: center;
+    padding: 20px;
+}

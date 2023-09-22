@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	CrazyBox - Bienvenue
+{% endblock %}
+
+
+{% block body %}
+	{% include "commons/_header.html.twig" %}
+	<main>
+		<div class="indexdiv">
+			<h1 class="indexh1">Crazy<span class="indexspan">Box</span>
+			</h1>
+			<h2 class="indexh2">Le meilleur de la fiction</h2>
+		</div>
+		  
+	<p class="indexh3">
+		En 2023, nous avons créé une nouvelle entreprise avec une mission simple : réaliser le rêve de nos enfances. C'est ainsi qu'avec cette toute nouvelle technologie apparue qui, mettant en scène tous vos personnages de fictions préférés.
+CrazyBox s'engage à faire du monde un endroit plus plaisant. Nous pensons qu'en fournissant à nos clients des produits et des services innovants, nous pouvons les aider à réaliser des rêves oubliés. Notre équipe possède une connaissance approfondie des dernières technologies et de la manière dont elles peuvent être appliquées. Nous sommes toujours à la recherche de nouvelles façons d'améliorer nos offres et de faire une différence dans le monde.
+Nous avons connu une croissance rapide. Nos produits et services sont très demandés et nous continuons à étendre notre portée à l'international.
+Aujourd'hui nous sommes à la recherche de nouveaux partenaires pouvant nous accompagner dans notre développement. Nous pensons qu'il est possible de créer une synergie positive entre nos deux entreprises et à cette fin nous souhaitons vous rencontrer.
+…
+	</p>
+																																																																				
+	<br>
+
+	{%if app.user%}
+	<div class="indexh3">
+		<a href="{{path('app_articles_index')}}">
+			Venez découvrir
+		</a>
+		{%else%}
+	<div class="indexh3">
+		<a href="{{path('app_login')}}">
+			Connectez-vous pour acceder aux produits
+		</a>
+	</div>
+	{%endif%}
+		{% include "commons/_footer.html.twig" %}
+	</main>
+{% endblock %}

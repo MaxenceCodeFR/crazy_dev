@@ -4,39 +4,40 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Descriptif</h1>
+{% include "commons/_header.html.twig" %}
+	<h1 class="showh1">Descriptif</h1>
 
-	<table class="table">
-		<tbody>
+	<div class="table">
+	
 			{% if is_granted ("ROLE_ADMIN") %}
 				{# Si le role admin est actif, les utilisateurs normaux ne pourrons pas voir les ID's des articles #}
-				<tr>
+				
 					<th>Id</th>
 
 					<td>{{ article.id }}</td>
-				</tr>
+
 			{% endif %}
+			<h2 class="showh2">{{ article.name }}</h2>
 			{#Affichage des noms des produits/articles #}
-			<tr>
-				<td>{{ article.name }}</td>
-			</tr>
-			<tr>
+			<div class="showdesc">
 				{#Affichage de la descrption et des prix#}
-				<th>Description et prix</th>
-				<td>{{ article.description }}</td>
-				<td>{{ article.price }}
-					€</td>
-			</tr>
+				<h3>Description et prix</h3>
+				{{ article.description }}
+				<button class="buttonshow">{{ article.price }}
+					€ <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="white" class="bi bi-basket2-fill" viewBox="0 0 16 16">
+						<path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"/>
+					  </svg></button>
+					
+			</div>
+			<a href="{{ path('app_articles_index') }}">Retour aux articles</a>
 			{#Affichage des images#}
-			<tr>
+			<!-- <tr>
 				<th><img src="{{ asset('assets/upload_directory/' ~ article.images) }}" alt={{article.name}}></th>
 
-			</tr>
-		</tbody>
-	</tbody>
-</table>
+			</tr> -->
+</div>
 
-<a href="{{ path('app_articles_index') }}">Retour aux articles</a>
+
 {% if is_granted("ROLE_ADMIN") %}
 	<a href="{{ path('app_articles_edit', {'id': article.id}) }}">Modifier</a>
 {% endif %}
@@ -44,4 +45,6 @@
 {# Si le role admin est actif, les utilisateurs normaux ne pourrons pas supprimer l'article  #}
 {% if is_granted("ROLE_ADMIN") %}
 	{{ include('articles/_delete_form.html.twig') }}
-{% endif %}{% endblock %}
+{% endif %}
+{% include "commons/_footer.html.twig" %}
+{% endblock %}

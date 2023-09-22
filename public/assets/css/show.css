@@ -1,0 +1,22 @@
+.table {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.showh1 {
+    color: #1b2832;
+}
+
+.showdesc {
+    background-color: #1b2832;
+    font-size: 1.25em;
+    padding: 30px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonshow {
+    margin-top: 10px;
+}

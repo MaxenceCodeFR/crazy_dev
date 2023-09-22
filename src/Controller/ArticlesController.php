@@ -19,12 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/articles')]
 class ArticlesController extends AbstractController
 {
-    private $doctrine;
 
-    public function __construct(ManagerRegistry $doctrine)
-    {
-        $this->doctrine = $doctrine;
-    }
 
     #[Route('/', name: 'app_articles_index', methods: ['GET'])]
     public function index(ArticlesRepository $articlesRepository): Response
@@ -42,8 +37,6 @@ class ArticlesController extends AbstractController
         $form = $this->createForm(ArticlesType::class, $article);
         $form->handleRequest($request);
 
-        $userRepository = $this->doctrine->getRepository(User::class);
-        $users = $userRepository->findAll();
 
         if ($form->isSubmitted() && $form->isValid()) {
 

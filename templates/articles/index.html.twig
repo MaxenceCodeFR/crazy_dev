@@ -4,40 +4,62 @@
 	Tous nos articles
 {% endblock %}
 
+
 {% block body %}
-	<h1>Faites votre choix</h1>
-
-	<table class="table">
-
-		<tbody>
+	{% include "commons/_header.html.twig" %}
+	<main>
+		<!-- Le reste du contenu -->
+		<!-- <ul>
+			<li>
+				<a href="{{path('app_home')}}">Accueil</a>
+			</li>
+			<li>
+				<a href="{{ path('app_articles_index')}}">Articles</a>
+			</li>
+			<li>
+				<a href="profil.html">Profil</a>
+			</li>
+			<li>
+				<a href="panier.html">Panier</a>
+			</li>
+		</ul> -->
+		<div class="grid-box">
 			{% for article in articles %}
-				<tr>
-					<td>{{ article.name }}</td>
-					<td>{{ article.description }}</td>
-					<td>{{ article.price }}
-						€</td>
-					<td><img src="{{ asset('assets/upload_directory/' ~ article.images) }}" alt={{article.name}}></td>
-				</tr>
-				<td>
-					<button>Commander</button>
-				</td>
-			</td>
+				<div class="container">
+					<div class="card">
+						<div class="imgBx">
+							<img src="{{asset('assets/upload_directory/' ~ article.images)}}" alt="{{article.name}}"class="card__img">
+						</div>
+
+						<div class="contentBx">
+
+							<span class="card__footer">
+								<span>{{article.name}}
+									{#Affiche l'édition seulement si le rôle admin est actif #}
+								{% if is_granted("ROLE_ADMIN") %}
+									<a href="{{ path('app_articles_edit', {'id': article.id}) }}">Editer</a>
+								{% endif %}
+								</span>
+								<a href="{{ path('app_articles_show', {'id': article.id}) }}">Afficher</a>
+								
+							</span>
+								
+						</div>
+
+					</div>
+				</div>
+
+			{% endfor %}
+
+		</div>
 
 
-			<td>
-				<a href="{{ path('app_articles_show', {'id': article.id}) }}">Afficher</a>
+		{# Pareil, seulement l'admin peut crée des box#}
+		{% if is_granted("ROLE_ADMIN") %}
+			<a href="{{ path('app_articles_new') }}">Create new</a>
+		{% endif %}
 
-				{#Affiche l'édition seulement si le rôle admin est actif #}
-				{% if is_granted("ROLE_ADMIN") %}
-					<a href="{{ path('app_articles_edit', {'id': article.id}) }}">Editer</a>
-				</td>
-			{% endif %}
-		</tbody>
-	</tr>
-{% else %}
-	<tr>
-		<td colspan="5">Notre site a soit fermé, ou soit en maintenances</td>
-	</tr>
-{% endfor %}</tbody></table>{# Pareil, seulement l'admin peut crée des box#}{% if is_granted("ROLE_ADMIN") %}<a href="{{ path('app_articles_new') }}">Create new</a>{% endif %}{% if app.user %}{{ app.user.email }}<a href="{{ path('app_logout') }}">
-Se déconnecter</a>{% else %}<a href="{{ path('app_login') }}">
-Se connecter</a>{% endif %}{% endblock %}
+		
+	</main>
+	{% include "commons/_footer.html.twig" %}
+{% endblock %}
