@@ -10,11 +10,11 @@
 }
 
 
-svg {
+.svgi {
     margin-right: 20px;
 }
 
-svg:hover {
+.svgi:hover {
     background-color: #364a59;
     padding: 5%
 }
