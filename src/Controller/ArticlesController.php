@@ -3,17 +3,18 @@
 namespace App\Controller;
 
 
-use App\Entity\Articles;
 use App\Entity\User;
+use App\Entity\Articles;
 use App\Form\ArticlesType;
 use Symfony\Component\Mime\Email;
-use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\ArticlesRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/articles')]
